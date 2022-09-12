@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.postsystem.demo.core.dao.PostFileDAO">
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="postFileId">
+		INSERT INTO post_attachement
+		(
+			user_post_id,
+			file_name
+		)
+		VALUES
+		(
+			#{userPostId},
+			#{fileName}
+			
+		)
+	</insert>
+	
+	<select id="getPostFileByPostId" resultType="com.postsystem.demo.core.dto.PostFileDTO">
+		SELECT 
+			*
+		FROM
+			post_attachement
+		WHERE
+			user_post_id = #{userPostId}
+	</select>
+	
+</mapper>

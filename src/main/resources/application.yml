@@ -1,0 +1,57 @@
+#server
+server:
+  port: 6666
+
+  
+#datasource
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    hikari:
+      connection-timeout: 10000
+      idle-timeout: 600000
+      initialization-fail-timeout: 10000
+      max-lifetime: 1800000
+      maximum-pool-size: 50
+      minimum-idle: 10
+      pool-name: HikariPool
+      register-mbeans: false
+      validation-timeout: 5000
+    password: sambo_123
+    url: jdbc:postgresql://127.0.0.1:5432/Assignment
+    username: postgres
+
+#mybatis
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mappers/*.xml
+    
+    
+#swagger
+springdoc:
+  api-docs:
+    enabled: 'true'
+  swagger-ui:
+    enabled: ${springdoc.api-docs.enabled}
+    
+# App Properties
+#sambo:
+# app:
+#  jwtSecret: wingapiSecretKey
+#  jwtExpirationMs: 86400000
+#  
+logging:
+ level:
+  org:
+   hibernate: 
+    stat: debug
+    
+   springframework: 
+    web: INFO
+  guru:
+   springframework:
+    controllers: DEBUG 
+ file:
+  name:
+   logs/logging.log

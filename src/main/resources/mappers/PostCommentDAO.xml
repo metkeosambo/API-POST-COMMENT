@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.postsystem.demo.core.dao.PostCommentDAO">
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="postCommentId">
+		INSERT INTO post_comment
+		(
+			user_post_id,
+			cmt,
+			parent_id,
+			created_by,
+			created_date
+		)
+		VALUES
+		(
+			#{userPostId},
+			#{cmt},
+			#{parentId},
+			#{createdBy},
+			NOW()
+			
+		)
+	</insert>
+	
+	<select id="getCommentByPostId" resultType="com.postsystem.demo.core.dto.PostCommentDTO">
+		SELECT 
+			pc.*,
+			u.user_name as user_name
+		FROM
+			post_comment pc
+		INNER JOIN users u ON u.user_id = pc.created_by
+		WHERE
+			user_post_id = #{userPostId}
+		ORDER BY post_comment_id,parent_id ASC
+	</select>
+</mapper>
